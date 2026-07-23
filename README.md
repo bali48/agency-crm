@@ -12,7 +12,21 @@ A sales tracker CRM built for a software agency's sales team (lead qualifiers an
 - **CSV bulk upload** for importing leads
 - **Multi-currency** support with per-lead conversion to a USD base
 - **Role-based access** — Admin / Setter / Closer
-- **Auth** — email/password (JWT) and Google login
+- **Auth** — email/password (JWT)
+
+## Demo
+
+Live app: https://agency-crm-lyart.vercel.app
+
+Seeded demo accounts (created via `POST /api/admin/seed`, see below):
+
+| Role   | Email                      | Password    |
+|--------|-----------------------------|-------------|
+| Admin  | admin@salestracker.com      | Admin@123   |
+| Setter | setter@salestracker.com     | Setter@123  |
+| Closer | closer@salestracker.com     | Closer@123  |
+
+These are demo-only credentials seeded into a shared test database — don't reuse these passwords anywhere real.
 
 ## Stack
 
@@ -78,6 +92,8 @@ yarn start
 
 ## Deployment
 
-- **Frontend**: Vercel
-- **Backend**: Render/Railway (needs a long-running process for the FastAPI app + APScheduler background jobs — not a fit for serverless)
+- **Frontend**: Vercel (auto-deploys on push to `main`)
+- **Backend**: Render, via `render.yaml` (needs a long-running process for the FastAPI app + APScheduler background jobs — not a fit for serverless)
 - **Database**: MongoDB Atlas
+
+Render's free-tier services spin down after inactivity, so the first request after a while may take ~30-50s to wake up.
