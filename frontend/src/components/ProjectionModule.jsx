@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,7 +15,7 @@ const ProjectionModule = ({ leads }) => {
   const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
   const [loading, setLoading] = useState(true);
 
-  const fetchProjection = async () => {
+  const fetchProjection = useCallback(async () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
@@ -29,11 +29,11 @@ const ProjectionModule = ({ leads }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [month]);
 
   useEffect(() => {
     fetchProjection();
-  }, [month, leads]);
+  }, [month, leads, fetchProjection]);
 
   if (loading || !projection) {
     return <div className="text-center py-12 text-muted-foreground">Loading projections...</div>;

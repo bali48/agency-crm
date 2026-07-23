@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
@@ -49,7 +49,7 @@ const DashboardMetrics = ({ leads }) => {
   const closers = [...new Set(leads.map(l => l.closer_name).filter(Boolean))];
   const sources = [...new Set(leads.map(l => l.source).filter(Boolean))];
 
-  const fetchMetrics = async () => {
+  const fetchMetrics = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const params = {};
@@ -67,9 +67,9 @@ const DashboardMetrics = ({ leads }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
-  const fetchGoal = async () => {
+  const fetchGoal = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(`${API}/revenue-goals/${currentMonth}`, {
@@ -82,7 +82,7 @@ const DashboardMetrics = ({ leads }) => {
     } catch (error) {
       console.error('Failed to fetch goal:', error);
     }
-  };
+  }, [currentMonth]);
 
   const updateGoal = async () => {
     try {
@@ -105,7 +105,7 @@ const DashboardMetrics = ({ leads }) => {
   useEffect(() => {
     fetchMetrics();
     fetchGoal();
-  }, [filters, leads]);
+  }, [filters, leads, fetchMetrics, fetchGoal]);
 
   if (loading || !metrics) {
     return <div className="text-center py-12 text-muted-foreground">Loading dashboard...</div>;
