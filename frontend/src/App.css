@@ -1,0 +1,76 @@
+/* Stripe-inspired CRM Design */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+.App {
+  min-height: 100vh;
+  background-color: #F6F9FC;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #0A2540;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Card shadows - Stripe style */
+.card-shadow {
+  box-shadow: 0 2px 5px rgba(10, 37, 64, 0.04), 0 0 1px rgba(10, 37, 64, 0.08);
+}
+
+.card-shadow:hover {
+  box-shadow: 0 8px 16px rgba(10, 37, 64, 0.06), 0 0 1px rgba(10, 37, 64, 0.08);
+}
+
+/* Smooth transitions */
+button, .card, .kanban-card {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+button:hover, .card:hover {
+  transform: translateY(-1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F9FC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E6E8EB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #425466;
+}
+
+/* Alert colors */
+.alert-danger {
+  border-color: #D92D20 !important;
+  background-color: #FEF3F2 !important;
+}
+
+.text-danger {
+  color: #D92D20 !important;
+}
+
+.alert-warning {
+  border-color: #F79009 !important;
+  background-color: #FFFAEB !important;
+}
+
+.alert-success {
+  border-color: #0D9068 !important;
+  background-color: #ECFDF3 !important;
+}
